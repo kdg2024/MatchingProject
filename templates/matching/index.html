@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1>コンタクト可能なユーザ一覧</h1>
+  {% for object in objects %}
+  <p>
+    <a href="{% url 'accounts:detail' object.id %}">
+    {{ object.username }}
+    </a>
+  </p>
+  {% endfor %}
+    
+{% endblock %}
+

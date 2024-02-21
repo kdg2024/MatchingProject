@@ -1,0 +1,65 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock title %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <!-- Custom CSS -->  {# 自分で書いたCSSファイル #}
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+    <!-- Extra CSS -->  {# 書くページで追加するCSS #}
+		{% block extra_css %}{% endblock extra_css %}
+  </head>
+  <body>
+    {# 通常はナビゲーションバーを用いるが，今回は簡易にするため用いない #}
+    <div class="padding-all">  {# static_local/custom.cssに記述したCSSを用いて余白を入れる #}
+      {# 共通して丈夫に表示したい部分 #}
+      {% if user.is_authenticated %}
+      <p>
+        <a class="navbar-item" href="{% url 'accounts:logout' %}">
+          {{ user }} - Logout
+        </a>
+      </p>
+      {% else %}
+      <p>
+        <a href="{% url 'accounts:login' %}">
+          Log in
+        </a>
+      </p>
+      <p>
+        <a href="{% url 'accounts:signup' %}">
+          Sign up
+        </a>
+      </p>
+      {% endif %}
+      {% if user.is_authenticated %}
+      <p>
+        <a href="{% url 'accounts:edit' %}">
+          プロフィール編集
+        </a>
+      </p>
+      <p>
+        <a href="{% url 'matching:index' %}">
+          トップ
+        </a>
+      </p>
+      <p>
+        <a href="{% url 'message:index' %}">
+          メッセージ
+        </a>
+      </p>
+      {% endif %}
+      {# ここまで #}
+      {# 他のhtmlに記述されたものが入る #}
+      {% block content %}{% endblock content %}
+      {# ここまで #}
+    </div> 
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    {# <!-- Custom JavaScript --> #}
+    {# <script src="{% static 'js/custom.js' %}"></script> #}
+    {# <!-- Extra JavaScript --> #}
+		{# {% block extra_js %}{% endblock extra_js %} #}
+  </body>
+</html>

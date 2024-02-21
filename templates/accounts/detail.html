@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<p>ユーザーネーム：{{ user_object.username }}</p>
+<p>種別：{{ user_object.registration_type }}</p>
+<p>性：{{ user_object.last_name }}</p>
+<p>名：{{ user_object.first_name }}</p>
+<p>プロフィール：{{ user_object.profile }}</p>
+{% if user_object.id != user.id %}
+<p>
+  <a href="{% url 'message:direct' user_object.id %}">
+    DirectMessage
+  </a>
+</p>
+{% endif %}
+{% endblock %}

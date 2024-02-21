@@ -1,0 +1,4 @@
+db.sqlite3
+MatchingProject/settings_local.py
+*/migrations/*.py
+!*/migrations/__init__.py

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>
+  メッセージルーム
+</h1>
+<h2>
+  ルーム名：{{ room.name }}
+</h2>
+<h3>メンバー</h3>
+{% for member in room.members.all %}
+  {# {% if member.id != user.id %} #}
+  <p>
+    <a href="{% url 'accounts:detail' member.id %}">
+      {{ member.username }}
+    </a>
+  </p>
+  {# {% endif %} #}
+{% endfor %}
+<h3>メッセージ</h3>
+{% for message in messages %}
+<p>{{ message.sender }} {{ message.at }}</p>
+<p>{{ message.message }}</p>
+{% endfor %}
+<form action="{% url 'message:room' room.id %}" method="post">
+  {% csrf_token %}
+  <p>
+    {{ form.message }}
+   <button type="submit" class="btn btn-primary">送信</button>
+  </p>
+</form>
+{% endblock %}
