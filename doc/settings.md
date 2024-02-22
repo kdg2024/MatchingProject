@@ -106,7 +106,29 @@ urlpatterns = [
 本リポジトリではデザインは最低限に留めているため，
 教科書も参考にしながら各自で自由に作ってほしい（コピペでも問題ない）．
 
+## **注意**
+Djangoの最新版（2023年末以降？）ではLogoutViewのGETメソッドが廃止されたようで，
+教科書を参照して`base.html`を作成するとログアウト時にエラーが発生します．
+仮想環境を使わない場合は以前にインストールしたバージョンで問題ないかもしれませんが，
+新しいパソコンや仮想環境で迂闊に
+`pip3 install django`としてしまうと最新版が入ってしまいます．
+こういうことがあるので，[requirements.txt](../requrequirements.txt)
+などバージョン指定は重要なんですね．
 
+本リポジトリの
+[base.html](../templates/base.html)
+は最新版に対応しています．
+```
+{# <a class="navbar-item" href="{% url 'accounts:logout' %}"> #}
+{#   {{ user }} - Logout #}
+{# </a> #}
+<form action="{% url 'accounts:logout' %}" method="post">
+  {% csrf_token %}
+  <button type="submit" class="btn btn-primary">{{ user }} - Logout</button>
+</form>
+```
+今までは単にaタグでよかったですが，最新版では`form`タグで囲って明示的に`post`にする必要があるようです．
+（本文執筆時点で得られた情報）
 
 
 

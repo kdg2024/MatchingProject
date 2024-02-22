@@ -17,9 +17,13 @@
       {# 共通して丈夫に表示したい部分 #}
       {% if user.is_authenticated %}
       <p>
-        <a class="navbar-item" href="{% url 'accounts:logout' %}">
-          {{ user }} - Logout
-        </a>
+        {# <a class="navbar-item" href="{% url 'accounts:logout' %}"> #}
+        {#   {{ user }} - Logout #}
+        {# </a> #}
+        <form action="{% url 'accounts:logout' %}" method="post">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-primary">{{ user }} - Logout</button>
+        </form>
       </p>
       {% else %}
       <p>
