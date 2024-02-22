@@ -22,8 +22,10 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
 ]
 ```
-タイムゾーンを変更しておく．
+言語とタイムゾーンを変更しておく．
 ```
+LANGUAGE_CODE = 'ja'
+
 TIME_ZONE = 'Asia/Tokyo'
 ```
 テンプレート（HTMLファイル）の置き場も設定しておく．
@@ -99,6 +101,7 @@ urlpatterns = [
 ]
 ```
 続いて，[base.html](../templates/base.html)
+と[custom.css](../static_local/css/custom.css)
 を作っておく．
 本リポジトリではデザインは最低限に留めているため，
 教科書も参考にしながら各自で自由に作ってほしい（コピペでも問題ない）．

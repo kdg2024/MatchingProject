@@ -75,7 +75,7 @@ from .forms import CustomUserCreationForm, CustomUserEditForm
 class SignUpView(generic.CreateView):
   # form_class = UserCreationForm
   form_class = CustomUserCreationForm
-  success_url = reverse_lazy('login')
+  success_url = reverse_lazy('accounts:login')
   template_name = 'accounts/signup.html'
 
 
@@ -135,7 +135,8 @@ urlpatterns = [
 ```
 LOGIN_URL = "accounts:login"
 ```
-これは`urls.py`で設定した名前に基づいて指定されている．
+これで`urls.py`で設定した名前に基づいてログインを要求されたときに
+遷移するべきURLを指定している．
 
 ## 参考
 - https://paiza.jp/works/django/primer/beginner-django3
