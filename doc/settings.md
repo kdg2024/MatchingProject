@@ -112,7 +112,7 @@ Djangoの最新版（2023年末以降？）ではLogoutViewのGETメソッドが
 仮想環境を使わない場合は以前にインストールしたバージョンで問題ないかもしれませんが，
 新しいパソコンや仮想環境で迂闊に
 `pip3 install django`としてしまうと最新版が入ってしまいます．
-こういうことがあるので，[requirements.txt](../requrequirements.txt)
+こういうことがあるので，[requirements.txt](../requirements.txt)
 などバージョン指定は重要なんですね．
 
 本リポジトリの
