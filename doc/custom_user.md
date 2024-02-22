@@ -65,7 +65,6 @@ class CustomUserEditForm(forms.ModelForm):
 
 [views.py](../accounts/views.py)
 ```
-# from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views import generic
 from django.shortcuts import render, redirect
@@ -124,10 +123,14 @@ urlpatterns = [
 ```
 必要なHTMLファイルは以下を参照して作成．
 デザインは微塵も考えていないのでカスタマイズ推奨．
+場所は`templates/accounts/<ここ>`だが，`login.html`は
+`templates/registration/login.html`である．本リポジトリを
+要確認．
 - [detail.html](../templates/accounts/detail.html)
 - [edit.html](../templates/accounts/edit.html)
 - [signup.html](../templates/accounts/signup.html)
-- [login.html](../templates/refistration/login.html)（配置場所に注意）
+- [login.html](../templates/registration/login.html)（配置場所に注意）
+
 あと，`settings.py`に以下を追記しておく．
 ```
 LOGIN_URL = "accounts:login"

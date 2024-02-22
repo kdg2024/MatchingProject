@@ -27,6 +27,12 @@ INSTALLED_APPS = [
 TIME_ZONE = 'Asia/Tokyo'
 ```
 テンプレート（HTMLファイル）の置き場も設定しておく．
+このとき，`os`を使うか`pathlib`を使うかは好みであるが，
+前者を使う場合は
+```
+import os
+```
+を加えたうえで
 ```
 TEMPLATES = [
     {
@@ -35,16 +41,26 @@ TEMPLATES = [
         'APP_DIRS': True,
     ...
 ```
+となる．礼として，
+```
+print(os.path.join("DIR1","DIR2","filename"))
+```
+の実行結果は以下の通り．
+```
+DIR1/DIR2/filename
+```
+
 今回，全アプリで共通のcssを利用し，その置き場所を`BASE_DIR`直下の`static_local`とする．
 単に`static`としないのは`STATIC_ROOT`と重複しないようにするため．
 その`STATIC_ROOT`は本番環境で静的ファイルを集約する場所である．
+`STATIC_URL`はデフォルト通りでよく，`STATICFILES_DIRS`と`STATIC_ROOT`を追記する．
 ```
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static_local"),]
 if not DEBUG:
   STATIC_ROOT = os.path.join(BASE_DIR,'static') 
 ```
-次に，**環境によって違う設定になる部分を分離する**．
+次に，**環境によって違う設定になる部分を分離する（しなくても動くので飛ばしても良い）**．
 `git`の管理化にあるファイルを編集すると`git pull`ができなくなるなどするため
 割と重要．
 手段としては環境変数を用いる等が一般的だが，今回は簡易化のため
@@ -57,7 +73,7 @@ if not DEBUG:
 `BASE_DIR`も`settings_local.py`に入れること
 （`settings.py`と`settings_local.py`に同じものがあっても問題は無い）．
 また，そのサンプルとして
-[settings_local_sample.py](../MatMatchingProject/settings_local_sample.py)
+[settings_local_sample.py](../MatchingProject/settings_local_sample.py)
 をコピーにより作成して`git`の管理化に加える．
 その後，`settings.py`に以下を加える．
 ```
@@ -70,6 +86,7 @@ key = get_random_secret_key()
 ```
 その後，[プロジェクトのurls.py](../MatchonMatchingProject/urls.py)に
 各アプリの`urls.py`を読み込む記述をする．
+下記2行目で`include`をimportするのを忘れずに．
 ```
 from django.contrib import admin
 from django.urls import path, include
@@ -84,7 +101,7 @@ urlpatterns = [
 続いて，[base.html](../templates/base.html)
 を作っておく．
 本リポジトリではデザインは最低限に留めているため，
-教科書も参考にしながら各自で自由に作ってほしい．
+教科書も参考にしながら各自で自由に作ってほしい（コピペでも問題ない）．
 
 
 
